@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.eventbus.Message;
 import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceResponse;
 import net.devaction.mylocation.locationpersistenceapi.protobuf.Status;
 
