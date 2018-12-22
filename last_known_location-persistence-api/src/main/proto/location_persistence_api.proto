@@ -1,0 +1,33 @@
+/**
+* author. Víctor Gil
+*
+* since December 2018 
+*/
+
+syntax = "proto3";
+
+package net.devaction.mylocation.locationpersistenceapi.protobuf;
+
+option java_multiple_files = true; 
+option java_generate_equals_and_hash = true;
+  
+message LocationPersistenceRequest{
+    int64 timestamp = 1;
+    string latitude = 2;
+    string longitude = 3;
+    string horizontalAccuracy = 4;
+    string altitude = 5;
+    string verticalAccuracy = 6;
+    int64 timeChecked = 7;
+    int64 timeMeasured = 8;
+}
+
+message LocationPersistenceResponse{
+    Status status = 1;
+    string errorMessage = 9;
+}
+
+enum Status {
+    SUCCESS = 0;
+    FAILURE = 1;
+}
