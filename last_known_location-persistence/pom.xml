@@ -24,7 +24,13 @@
             <groupId>net.devaction.mylocation</groupId>
             <artifactId>last_known_location-persistence-api</artifactId>
             <version>1.0.0.0-SNAPSHOT</version>
-        </dependency>                
+        </dependency>
+        <!-- We just need this to save the LastKnownLocationResponse in the file -->                
+        <dependency>
+            <groupId>net.devaction.mylocation</groupId>
+            <artifactId>last_known_location-api</artifactId>
+            <version>1.0.0.0-SNAPSHOT</version>
+        </dependency> 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
