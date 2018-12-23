@@ -1,4 +1,4 @@
-package net.devaction.mylocation.lastknownlocationpersistence.server.config;
+package net.devaction.mylocation.lastknownlocationpersistence.config;
 
 /**
  * @author Víctor Gil
@@ -6,6 +6,8 @@ package net.devaction.mylocation.lastknownlocationpersistence.server.config;
  * since December 2018
  */
 public interface AddressProvider{
+
     public String provideAddress();
-    
 }
+
+

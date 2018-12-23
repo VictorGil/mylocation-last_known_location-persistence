@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 
-import net.devaction.mylocation.lastknownlocationpersistence.server.config.FilePathProvider;
+import net.devaction.mylocation.lastknownlocationpersistence.config.FilePathProvider;
 import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceRequest;
 
 /**
