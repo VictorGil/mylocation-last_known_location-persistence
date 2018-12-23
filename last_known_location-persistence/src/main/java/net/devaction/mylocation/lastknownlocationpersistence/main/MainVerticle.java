@@ -5,10 +5,10 @@ import org.slf4j.LoggerFactory;
 
 import io.vertx.config.ConfigRetriever;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.json.JsonObject;
 import net.devaction.mylocation.lastknownlocationpersistence.config.ConfigValuesProvider;
 import net.devaction.mylocation.lastknownlocationpersistence.server.LocationPersistenceServerVerticle;
-import net.devaction.mylocation.lastknownlocationpersistence.config.ConfigValuesProvider;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,7 +22,7 @@ public class MainVerticle extends AbstractVerticle{
     private static final Logger log = LoggerFactory.getLogger(MainVerticle.class);
     private JsonObject vertxConfig;
     
-    private static final String LAST_KNOWN_LOCATION_SERVICE_CONFIG = "last_known_location_service_config";
+    private static final String LOCATION_PERSISTENCE_SERVICE_CONFIG = "location_persistence_service_config";
 
     @Override
     public void start(){
@@ -40,10 +40,11 @@ public class MainVerticle extends AbstractVerticle{
                 log.info("Retrieved configuration: " + vertxConfig);
                 
                 //This is a workaround, kind of        
-                ConfigValuesProvider.setLocationPersistenceServiceConfig(vertxConfig.getJsonObject(LAST_KNOWN_LOCATION_SERVICE_CONFIG));
+                ConfigValuesProvider.setLocationPersistenceServiceConfig(vertxConfig.getJsonObject(LOCATION_PERSISTENCE_SERVICE_CONFIG));
                 
                 ApplicationContext appContext = new ClassPathXmlApplicationContext("conf/spring/beans.xml");
-                LocationPersistenceServerVerticle verticle = (LocationPersistenceServerVerticle) appContext.getBean("lastKnownLocationServerVerticle");
+                LocationPersistenceServerVerticle verticle = (LocationPersistenceServerVerticle) appContext
+                        .getBean(LocationPersistenceServerVerticle.class.getSimpleName());
                 ((ConfigurableApplicationContext) appContext).close();                
                 
                 //this is for the sun.misc.SignalHandler.handle method to be able to shutdown Vert.x
@@ -55,13 +56,17 @@ public class MainVerticle extends AbstractVerticle{
     }
     
     public void deployVerticle(LocationPersistenceServerVerticle verticle){
-        log.info("Going to deploy " + LocationPersistenceServerVerticle.class.getSimpleName());
-        vertx.deployVerticle(verticle, asyncResult -> {
+        log.info("Going to deploy " + LocationPersistenceServerVerticle.class.getSimpleName() + " as a worker verticle.");
+        final DeploymentOptions options = new DeploymentOptions().setWorker(true);
+        
+        vertx.deployVerticle(verticle, options, asyncResult -> {
             if (asyncResult.succeeded()){
                 log.info("Successfully deployed " +  
                         LocationPersistenceServerVerticle.class.getSimpleName() + ". Result: " + asyncResult.result());                             
             } else{
-                log.error("FATAL: Error when trying to deploy " + LocationPersistenceServerVerticle.class.getSimpleName());
+                log.error("FATAL: Error when trying to deploy " + LocationPersistenceServerVerticle.class.getSimpleName() + 
+                        " " + asyncResult.cause(), asyncResult.cause());
+                log.info("Going to close Vert.x");
                 vertx.close(closeHandler -> {
                     log.info("vertx has been closed");
                 });

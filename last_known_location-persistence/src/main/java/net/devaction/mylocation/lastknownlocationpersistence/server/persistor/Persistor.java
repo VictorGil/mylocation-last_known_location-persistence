@@ -1,4 +1,4 @@
-package net.devaction.mylocation.lastknownlocationpersistence.server.provider;
+package net.devaction.mylocation.lastknownlocationpersistence.server.persistor;
 
 import java.io.IOException;
 import java.nio.channels.FileChannel;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.InitializingBean;
 
 import net.devaction.mylocation.lastknownlocationapi.protobuf.LastKnownLocationResponse;
 import net.devaction.mylocation.lastknownlocationpersistence.config.FilePathProvider;
-import net.devaction.mylocation.lastknownlocationpersistence.server.LastKnownLocationResponseProviderImpl;
 import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceRequest;
 import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceResponse;
 import net.devaction.mylocation.locationpersistenceapi.protobuf.Status;
@@ -31,7 +30,7 @@ public class Persistor implements InitializingBean{
     private String filePath;
     private FilePathProvider filePathProvider;
     
-    private LastKnownLocationResponseProviderImpl locationResponseProvider;
+    private LastKnownLocationResponseProvider locationResponseProvider;
     
     @Override
     public void afterPropertiesSet() throws Exception{
@@ -136,6 +135,10 @@ public class Persistor implements InitializingBean{
 
     public void setFilePathProvider(FilePathProvider filePathProvider){
         this.filePathProvider = filePathProvider;
+    }
+
+    public void setLocationResponseProvider(LastKnownLocationResponseProvider locationResponseProvider){
+        this.locationResponseProvider = locationResponseProvider;
     }   
 }
 

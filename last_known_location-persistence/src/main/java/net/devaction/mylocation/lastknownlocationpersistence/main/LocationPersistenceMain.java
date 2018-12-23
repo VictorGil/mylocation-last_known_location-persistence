@@ -13,6 +13,7 @@ import sun.misc.SignalHandler;
  *
  * since December 2018
  */
+@SuppressWarnings("restriction")
 public class LocationPersistenceMain implements SignalHandler{
     private static final Logger log = LoggerFactory.getLogger(LocationPersistenceMain.class);
 

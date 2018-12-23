@@ -9,6 +9,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.Message;
+import net.devaction.mylocation.lastknownlocationpersistence.server.persistor.Persistor;
 import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceRequest;
 
 /**
@@ -43,4 +44,13 @@ public class LocationPersistenceServerHandlerImpl implements LocationPersistence
             bufferMessage.reply(errorBufferProvider.provide(ex.toString(), ex));
         }
     }
+
+    public void setErrorBufferProvider(ErrorBufferProvider errorBufferProvider){
+        this.errorBufferProvider = errorBufferProvider;
+    }
+
+    public void setPersistor(Persistor persistor){
+        this.persistor = persistor;
+    }
 }
+
