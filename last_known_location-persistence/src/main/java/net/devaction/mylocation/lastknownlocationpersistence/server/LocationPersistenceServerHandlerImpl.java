@@ -1,7 +1,5 @@
 package net.devaction.mylocation.lastknownlocationpersistence.server;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +9,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.Message;
 import net.devaction.mylocation.lastknownlocationpersistence.server.persistor.Persistor;
 import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceRequest;
+import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceResponse;
 
 /**
  * @author Víctor Gil
@@ -38,11 +37,11 @@ public class LocationPersistenceServerHandlerImpl implements LocationPersistence
             return;
         }
         
-        try{
-            persistor.persist(request);
-        } catch (IOException ex){
-            bufferMessage.reply(errorBufferProvider.provide(ex.toString(), ex));
-        }
+        LocationPersistenceResponse response = persistor.persist(request);
+        //bufferMessage.reply(errorBufferProvider.provide(ex.toString(), ex));
+        Buffer responseBuffer = Buffer.buffer();
+        responseBuffer.appendBytes(response.toByteArray());
+        bufferMessage.reply(responseBuffer);        
     }
 
     public void setErrorBufferProvider(ErrorBufferProvider errorBufferProvider){

@@ -39,7 +39,7 @@ public class Persistor implements InitializingBean{
         log.info("File path to store the latest known location: " + filePath);
     }   
     
-    public LocationPersistenceResponse persist(LocationPersistenceRequest persistenceRequest) throws IOException{
+    public LocationPersistenceResponse persist(LocationPersistenceRequest persistenceRequest){
         final Path path = Paths.get(filePath);
         FileChannel fileChannel = null;
         

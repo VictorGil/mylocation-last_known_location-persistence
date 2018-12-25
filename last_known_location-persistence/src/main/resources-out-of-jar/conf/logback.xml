@@ -11,9 +11,13 @@
         <appender-ref ref="console" />
     </logger>
 
-    <!--root level="error"-->
-    <root level="debug">
+    <root level="warn">
+    <!--root level="debug"-->
         <appender-ref ref="console" />
     </root>
-
+    
+    <logger name="com.hazelcast" level="error" additivity="false">
+        <appender-ref ref="console" />
+    </logger>
+    
 </configuration>
