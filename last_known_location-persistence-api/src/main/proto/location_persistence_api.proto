@@ -12,13 +12,18 @@ option java_multiple_files = true;
 option java_generate_equals_and_hash = true;
   
 message LocationPersistenceRequest{
+    /* This is Unix time (seconds, not milliseconds) */
     optional int64 timestamp = 1;
+    
     optional string latitude = 2;
     optional string longitude = 3;
     optional string horizontalAccuracy = 4;
     optional string altitude = 5;
     optional string verticalAccuracy = 6;
+    
+    /* This is Unix time (seconds, not milliseconds) */
     optional int64 timeChecked = 7;
+    /* This is Unix time (seconds, not milliseconds) */
     optional int64 timeMeasured = 8;
 }
 
