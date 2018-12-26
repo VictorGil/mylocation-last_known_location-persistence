@@ -5,7 +5,7 @@ package net.devaction.mylocation.lastknownlocationpersistence.config;
  *
  * since December 2018
  */
-public interface BaseDirProvider{
+public interface PersistenceBaseDirProvider{
     public String provide();
 }
 

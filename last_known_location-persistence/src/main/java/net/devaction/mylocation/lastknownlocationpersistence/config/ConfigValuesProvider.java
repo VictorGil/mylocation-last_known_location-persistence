@@ -17,7 +17,7 @@ public class ConfigValuesProvider implements AddressProvider, FilePathProvider{
 
     private static JsonObject locationPersistenceServiceConfig;
     
-    private BaseDirProvider baseDirProvider;
+    private PersistenceBaseDirProvider persistenceBaseDirProvider;
     
     @Override
     public String provideAddress(){
@@ -29,7 +29,7 @@ public class ConfigValuesProvider implements AddressProvider, FilePathProvider{
     @Override
     public String provideFilePath(){
         String relativeFilePath = locationPersistenceServiceConfig.getString("file_path");
-        String baseDir = baseDirProvider.provide();
+        String baseDir = persistenceBaseDirProvider.provide();
         String filePath = baseDir + File.separator + relativeFilePath;
         log.info("Fiel path to write/persist the latest known location: " + filePath);
         
@@ -40,8 +40,8 @@ public class ConfigValuesProvider implements AddressProvider, FilePathProvider{
         ConfigValuesProvider.locationPersistenceServiceConfig = locationPersistenceServiceConfig;
     }
 
-    public void setBaseDirProvider(BaseDirProvider baseDirProvider){
-        this.baseDirProvider = baseDirProvider;
+    public void setPersistenceBaseDirProvider(PersistenceBaseDirProvider persistenceBaseDirProvider){
+        this.persistenceBaseDirProvider = persistenceBaseDirProvider;
     }
 }
 

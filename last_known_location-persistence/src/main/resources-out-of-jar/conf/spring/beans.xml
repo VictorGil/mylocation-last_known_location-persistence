@@ -30,10 +30,10 @@
     
     <bean id="configValuesProvider" 
             class="net.devaction.mylocation.lastknownlocationpersistence.config.ConfigValuesProvider">
-        <property name="baseDirProvider" ref="baseDirProvider"/>
+        <property name="persistenceBaseDirProvider" ref="persistenceBaseDirProvider"/>
     </bean>
     
-    <bean id="baseDirProvider" 
-            class="net.devaction.mylocation.lastknownlocationpersistence.config.BaseDirProviderImpl"/>
+    <bean id="persistenceBaseDirProvider" 
+            class="net.devaction.mylocation.lastknownlocationpersistence.config.PersistenceBaseDirProviderImpl"/>
 </beans>
 
