@@ -44,7 +44,7 @@ public class LastKnownLocationResponseProviderImpl implements LastKnownLocationR
         
         LastKnownLocationResponse locationResponse = locationResponseBuilder.build(); 
         
-        log.trace("Last know location response to be sent: " + locationResponse);
+        log.trace("Last known location response to be sent:\n" + locationResponse);
         return locationResponse;
     }
 }

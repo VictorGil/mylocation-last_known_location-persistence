@@ -7,6 +7,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.EventBus;
 import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceRequest;
+import net.devaction.mylocation.locationpersistenceapi.util.ProtoUtil;
 
 /**
  * @author Víctor Gil
@@ -24,7 +25,7 @@ public class LocationPersistenceTesterClientVerticle extends AbstractVerticle{
         EventBus eventBus = vertx.eventBus();
         
         LocationPersistenceRequest protoRequest = LocationPersistenceTestRequestProvider.provide();
-        log.info("Request proto message to be sent to the server: " + protoRequest);
+        log.info("Request proto message to be sent to the server:\n" + ProtoUtil.toString(protoRequest));
         
         Buffer buffer = Buffer.buffer(); 
         buffer.appendBytes(protoRequest.toByteArray());
