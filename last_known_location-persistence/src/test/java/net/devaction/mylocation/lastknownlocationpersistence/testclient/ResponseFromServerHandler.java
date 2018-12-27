@@ -9,8 +9,10 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.Message;
+
 import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceResponse;
 
+import sun.misc.Signal;
 /**
  * @author Víctor Gil
  *
@@ -19,6 +21,7 @@ import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersiste
 public class ResponseFromServerHandler implements Handler<AsyncResult<Message<Buffer>>>{
     private static final Logger log = LoggerFactory.getLogger(ResponseFromServerHandler.class);
 
+    @SuppressWarnings("restriction")
     @Override
     public void handle(AsyncResult<Message<Buffer>> asyncResult){
         if (asyncResult.succeeded()){
@@ -41,8 +44,10 @@ public class ResponseFromServerHandler implements Handler<AsyncResult<Message<Bu
         } else{
             Throwable throwable = asyncResult.cause();
             log.error("The request could not be processed by the server: " + throwable, throwable);
-        }         
+        }
+        
+        log.info("Going to raise a WINCH signal in order to trigger the graceful shutdown of both Vert.x and the JVM");
+        Signal.raise(new Signal("WINCH")); 
     }
 }
-
 
