@@ -16,11 +16,9 @@ public class ProtoUtil{
             stringBuilder.append("timestamp (string): ")
             .append(DateUtil.getDateString(request.getTimestamp())).append("\n");    
     
-    
         if (request.hasTimeChecked())
             stringBuilder.append("timeChecked (string): ")
-            .append(DateUtil.getDateString(request.getTimeChecked())).append("\n"); 
-    
+            .append(DateUtil.getDateString(request.getTimeChecked())).append("\n");    
         
         if (request.hasTimeMeasured())
             stringBuilder.append("timeMeasured (string): ")
