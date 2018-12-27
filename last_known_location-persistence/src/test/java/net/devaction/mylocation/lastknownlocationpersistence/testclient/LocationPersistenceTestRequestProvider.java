@@ -25,8 +25,8 @@ public class LocationPersistenceTestRequestProvider{
         reqBuilder.setAltitude("5");
         reqBuilder.setVerticalAccuracy("0.1");
         
-        reqBuilder.setTimeChecked(System.currentTimeMillis() / 1000 - 3600 * 60);
-        reqBuilder.setTimeMeasured(System.currentTimeMillis() / 1000 - 3600 * 60 * 2);
+        reqBuilder.setTimeChecked(System.currentTimeMillis() / 1000 - 60 * 60); //one hour ago
+        reqBuilder.setTimeMeasured(System.currentTimeMillis() / 1000 - 60 * 60 * 2); //two hours ago
         
         return reqBuilder.build();
     }
