@@ -12,16 +12,17 @@ import io.vertx.core.eventbus.Message;
 
 import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersistenceResponse;
 
+//NOTE: this is not part of the standard Java API
 import sun.misc.Signal;
 /**
  * @author Víctor Gil
  *
  * since December 2018
  */
+@SuppressWarnings("restriction")
 public class ResponseFromServerHandler implements Handler<AsyncResult<Message<Buffer>>>{
     private static final Logger log = LoggerFactory.getLogger(ResponseFromServerHandler.class);
 
-    @SuppressWarnings("restriction")
     @Override
     public void handle(AsyncResult<Message<Buffer>> asyncResult){
         if (asyncResult.succeeded()){
