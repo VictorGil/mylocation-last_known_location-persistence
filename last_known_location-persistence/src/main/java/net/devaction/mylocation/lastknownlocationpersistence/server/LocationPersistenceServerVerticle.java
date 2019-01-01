@@ -44,7 +44,7 @@ public class LocationPersistenceServerVerticle extends AbstractVerticle implemen
                 log.info("The " + handler.getClass().getSimpleName() + 
                         " has been successfully registered ans it started listening for messages on " + address + " event bus address.");
             } else {
-                log.error("FATAL: Registration of " + LocationPersistenceServerHandler.class.getSimpleName() + " has failed.");
+                log.error("FATAL: Registration of " + handler.getClass().getSimpleName() + " has failed.");
             }
         });        
     }
