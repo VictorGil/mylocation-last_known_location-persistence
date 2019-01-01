@@ -8,6 +8,7 @@ import io.vertx.core.Vertx;
 
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
+
 /**
  * @author Víctor Gil
  *
@@ -21,6 +22,8 @@ public class LocationPersistenceMain implements SignalHandler{
     private static final String WINCH_SIGNAL = "WINCH";
     private static boolean isVertxClosed = false;  
     
+    private static final String VERTX_CLUSTER_HOST = "vertx.cluster.host";
+    
     public static void main(String[] args){
         new LocationPersistenceMain().run();        
     }
@@ -28,8 +31,18 @@ public class LocationPersistenceMain implements SignalHandler{
     private LocationPersistenceMain(){}
     
     private void run(){
-        log.info("Starting application");        
-        Launcher.executeCommand("run", MainVerticle.class.getName(), "-cluster");   
+        log.info("Starting application");  
+        
+        final String clusterHost = System.getProperty(VERTX_CLUSTER_HOST);
+        if (clusterHost == null || clusterHost.isEmpty()){
+            log.error("FATAL: Java system property " + VERTX_CLUSTER_HOST + " is not set. Exiting");
+            System.exit(1);
+        }
+        
+        log.info("The Vertx cluster host is: " + clusterHost);
+        Launcher.executeCommand("run", MainVerticle.class.getName(), "-cluster", 
+                "-cluster-host", clusterHost); 
+        
         registerThisAsOsSignalHandler();
     }
     
