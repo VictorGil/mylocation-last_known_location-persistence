@@ -41,7 +41,7 @@ public class LocationPersistenceServerVerticle extends AbstractVerticle implemen
         
         consumer.completionHandler(asyncResult -> {
             if (asyncResult.succeeded()) {
-                log.info("The " + LocationPersistenceServerHandler.class.getSimpleName() + 
+                log.info("The " + handler.getClass().getSimpleName() + 
                         " has been successfully registered ans it started listening for messages on " + address + " event bus address.");
             } else {
                 log.error("FATAL: Registration of " + LocationPersistenceServerHandler.class.getSimpleName() + " has failed.");
