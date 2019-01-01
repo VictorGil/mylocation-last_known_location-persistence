@@ -14,6 +14,7 @@ import net.devaction.mylocation.locationpersistenceapi.protobuf.LocationPersiste
 
 //NOTE: this is not part of the standard Java API
 import sun.misc.Signal;
+
 /**
  * @author Víctor Gil
  *

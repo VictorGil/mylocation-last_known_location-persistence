@@ -29,7 +29,7 @@ public class LocationPersistenceTesterClientMain implements SignalHandler{
     private LocationPersistenceTesterClientMain(){}
     
     private void run(){
-        log.info("Starting tester  application");        
+        log.info("Starting " + this.getClass().getSimpleName() + " application");        
         Launcher.executeCommand("run", TesterClientMainVerticle.class.getName(), "-cluster");   
         registerThisAsOsSignalHandler();
     }
