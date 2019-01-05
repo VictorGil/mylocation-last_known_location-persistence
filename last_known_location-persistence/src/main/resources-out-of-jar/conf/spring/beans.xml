@@ -7,8 +7,16 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
     
-    <bean id="LocationPersistenceServerVerticle" class="net.devaction.mylocation.lastknownlocationpersistence.server.LocationPersistenceServerVerticle">
-        <property name="addressProvider" ref="configValuesProvider"/>
+    <bean id="verticlesBean" class="net.devaction.mylocation.vertxutilityextensions.main.VerticlesBean">
+        <property name="verticles">
+            <list value-type="io.vertx.core.Verticle">
+                <ref bean="locationPersistenceServerVerticle"/>
+            </list>
+        </property>
+    </bean> 
+    
+    <bean id="locationPersistenceServerVerticle" class="net.devaction.mylocation.lastknownlocationpersistence.server.LocationPersistenceServerVerticle">
+        <property name="addressProvider" ref="lastKnownLocationPersistenceConfigValuesProvider"/>
         <property name="handler" ref="handler"/>
     </bean>
    
@@ -22,18 +30,21 @@
     <bean id="persistor" 
             class="net.devaction.mylocation.lastknownlocationpersistence.server.persistor.Persistor">
         <property name="locationResponseProvider" ref="lastKnownLocationResponseProvider"/>
-        <property name="filePathProvider" ref="configValuesProvider"/>
+        <property name="filePathProvider" ref="lastKnownLocationPersistenceConfigValuesProvider"/>
     </bean>
     
     <bean id="lastKnownLocationResponseProvider" 
             class="net.devaction.mylocation.lastknownlocationpersistence.server.persistor.LastKnownLocationResponseProviderImpl"/>
     
-    <bean id="configValuesProvider" 
-            class="net.devaction.mylocation.lastknownlocationpersistence.config.ConfigValuesProvider">
+    <bean id="lastKnownLocationPersistenceConfigValuesProvider" 
+            class="net.devaction.mylocation.lastknownlocationpersistence.config.LastKnownLocationPersistenceConfigValuesProvider">
+        <property name="configValuesProvider" ref="configValuesProvider"/>
         <property name="persistenceBaseDirProvider" ref="persistenceBaseDirProvider"/>
     </bean>
     
     <bean id="persistenceBaseDirProvider" 
             class="net.devaction.mylocation.lastknownlocationpersistence.config.PersistenceBaseDirProviderImpl"/>
+    
+    <bean id="configValuesProvider" class="net.devaction.mylocation.vertxutilityextensions.config.ConfigValuesProviderImpl"/>            
 </beans>
 

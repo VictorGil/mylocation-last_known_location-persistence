@@ -44,7 +44,7 @@ public class MainVerticle extends AbstractVerticle{
                 
                 ApplicationContext appContext = new ClassPathXmlApplicationContext("conf/spring/beans.xml");
                 LocationPersistenceServerVerticle verticle = (LocationPersistenceServerVerticle) appContext
-                        .getBean(LocationPersistenceServerVerticle.class.getSimpleName());
+                        .getBean("locationPersistenceServerVerticle");
                 ((ConfigurableApplicationContext) appContext).close();                
                 
                 //this is for the sun.misc.SignalHandler.handle method to be able to shutdown Vert.x

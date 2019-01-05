@@ -30,7 +30,8 @@ public class LocationPersistenceTesterClientMain implements SignalHandler{
     
     private void run(){
         log.info("Starting " + this.getClass().getSimpleName() + " application");        
-        Launcher.executeCommand("run", TesterClientMainVerticle.class.getName(), "-cluster");   
+        Launcher.executeCommand("run", TesterClientMainVerticle.class.getName(), "-cluster",
+                "-cluster-host", "localhost");   
         registerThisAsOsSignalHandler();
     }
     

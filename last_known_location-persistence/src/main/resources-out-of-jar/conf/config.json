@@ -1,6 +1,7 @@
 {
-    "location_persistence_service_config": {
+    "application_configuration": {
         "event_bus_location_persist_address": "last_known_location_persist",
         "file_path": "data/last_known_location.data"
     }
 }
+

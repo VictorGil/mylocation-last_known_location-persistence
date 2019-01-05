@@ -36,6 +36,7 @@ public class LocationPersistenceServerHandlerImpl implements LocationPersistence
             bufferMessage.reply(errorBufferProvider.provide(ex.toString(), ex));
             return;
         }
+        log.trace(request.getClass().getSimpleName() + " received:\n" + request);
         
         LocationPersistenceResponse response = persistor.persist(request);
         //bufferMessage.reply(errorBufferProvider.provide(ex.toString(), ex));
