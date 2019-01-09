@@ -13,4 +13,3 @@ public interface LocationPersistenceServerHandler extends Handler<Message<Buffer
 
 }
 
-
