@@ -3,21 +3,10 @@
 set -e 
 
 BASE_DIR=`dirname "$0"`
-CLASS_NAME="net.devaction.mylocationcore.main.MyLocationCoreMain"
-CLASSPATH="${BASE_DIR}/../lib/*:${BASE_DIR}/../conf:${BASE_DIR}/.."
+CLASS_NAME="net.devaction.mylocation.vertxutilityextensions.main.VertxStarter"
+CLASSPATH="${BASE_DIR}/../conf:${BASE_DIR}/../conf/lcl:${BASE_DIR}/../lib/*"
 
-JAVA_PROPERTIES="-Dbase.dir=${BASE_DIR}" 
+JAVA_SYSTEM_PROPERTIES="-Dhazelcast.logging.type=slf4j -Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory -Djava.net.preferIPv4Stack=true -Dvertx.cluster.host=localhost -Dpersistence.base.dir=$PERSISTENCE_BASE_DIR -Dmylocation.service.id=last_known_location-persistence"
 
-#java -cp $CLASSPATH $CLASS_NAME & 
-java ${JAVA_PROPERTIES} -cp $CLASSPATH $CLASS_NAME 
-#PID=$!
-
-#wait for the process to come up
-#sleep 3
-
-#check if the process is running
-#kill -s NULL $PID 
- 
-#echo "`date` - INFO: application successfully started."
-
+java $JAVA_SYSTEM_PROPERTIES -classpath $CLASSPATH $CLASS_NAME 
  
