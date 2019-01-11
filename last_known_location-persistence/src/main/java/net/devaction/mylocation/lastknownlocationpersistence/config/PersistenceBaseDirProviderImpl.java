@@ -21,7 +21,7 @@ public class PersistenceBaseDirProviderImpl implements PersistenceBaseDirProvide
         if (baseDir == null || baseDir.isEmpty()) {
             String errMessage = "FATAL: the " + PERSISTENCE_BASE_DIR + " Java system property must be set";
             log.error(errMessage);
-            throw new RuntimeException("errMessage");
+            throw new RuntimeException(errMessage);
         }
         return baseDir;
     }  
